@@ -204,7 +204,6 @@ def test_validar_users_activos(users):
 # Haz tres tests distintos reutilizando esa misma fixture.
 
 @pytest.fixture
-
 def api_response():
 
     return {
