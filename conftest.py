@@ -116,7 +116,7 @@ def response():
 # ¿Qué se imprime primero? Creando fixture
 # ¿Por qué test_numero() puede usar numero sin importarlo? debido a que numero() se encuentra dentro de conftest.py
 # y se puede acceder desde cualquier lugar dentro del proyecto sin necesidad de importarlo
-# ¿Qué archivo carga primero Pytest cuando encuentra una fixture compartida?
+# ¿Qué archivo carga primero Pytest cuando encuentra una fixture compartida? conftest.py
 # ¿Qué ventaja ofrece conftest.py frente a copiar la fixture en cada archivo de pruebas? nos permite reutilizar una fixture
 # en varios tests definiendolo una sola vez y en caso de que necesitemos cambiar algun valor de dicha fixture para los tests
 # del proyecto solo lo debemos de cambiar una sola vez en el fixture que se encuentra dentro de conftest.py
