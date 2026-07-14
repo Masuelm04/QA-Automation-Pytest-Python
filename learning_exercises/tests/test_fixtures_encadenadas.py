@@ -87,14 +87,14 @@ def validar_authorization(headers):
 
 class User:
 
-    def __init__(self, nombre, apellido):
+    def __init__(self, nombre, edad):
         self.nombre = nombre
-        self.apellido = apellido
+        self.edad = edad
 
 @pytest.fixture
 def user():
 
-    return User("Antonio", "Mesa")
+    return User("Antonio", 22)
 
 def test_validar_nombre_usuario(user):
 
@@ -102,4 +102,43 @@ def test_validar_nombre_usuario(user):
 
 def test_validar_apellido_usuario(user):
 
-    assert user.apellido == "Mesa"
+    assert user.edad == 22
+
+# Ejercicio 4
+
+# Crear fixture factory:
+
+# crear_usuario()
+
+# Generar:
+
+# Ana
+# Pedro
+# Maria
+
+@pytest.fixture
+def crear_usuario():
+
+    def _crear(nombre, edad):
+
+        return User(nombre, edad)
+    
+    return _crear
+
+def test_usuario(crear_usuario):
+
+    usuario = crear_usuario("Ana", 30)
+
+    assert usuario.nombre == "Ana"
+
+def test_usuario_1(crear_usuario):
+
+    usuario_1 = crear_usuario("Pedro", 20)
+
+    assert usuario_1.nombre == "Pedro"
+
+def test_usuario_2(crear_usuario):
+
+    usuario_2 = crear_usuario("Maria", 19)
+
+    assert usuario_2.nombre == "Maria"
