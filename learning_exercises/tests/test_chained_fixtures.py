@@ -67,11 +67,11 @@ def headers(token):
         "Authorization": f"Bearer {token}"
     }
 
-def validar_authorization(headers):
+def test_validar_authorization(headers):
 
     assert "Authorization" in headers
 
-    assert headers["authorization"] == "Bearer abc1234"
+    assert headers["Authorization"] == "Bearer abc1234"
 
 # Ejercicio 3
 
@@ -100,7 +100,7 @@ def test_validar_nombre_usuario(user):
 
     assert user.nombre == "Antonio"
 
-def test_validar_apellido_usuario(user):
+def test_validar_edad_usuario(user):
 
     assert user.edad == 22
 
@@ -142,3 +142,81 @@ def test_usuario_2(crear_usuario):
     usuario_2 = crear_usuario("Maria", 19)
 
     assert usuario_2.nombre == "Maria"
+
+# Ejercicio 5
+
+# Fixture con yield:
+
+# Abrir conexión
+
+# ↓
+
+# test
+
+# ↓
+
+# Cerrar conexión
+
+@pytest.fixture
+def conexion():
+
+    print("Abrir conexión")
+
+    yield
+
+    print("Cerrar conexión")
+
+@pytest.fixture
+def cliente(conexion):
+
+    print("Creando cliente")
+
+    yield {
+        "nombre": "Luis"
+    }
+
+    print("Eliminando cliente")
+
+def test_cliente(cliente):
+
+    assert cliente["nombre"] == "Luis"
+
+# Ejercicio (Nivel entrevista)
+
+# Explicar sin ejecutar:
+
+# @pytest.fixture
+# def token():
+
+#     print("token")
+
+#     yield "abc"
+
+#     print("cleanup token")
+
+
+# @pytest.fixture
+# def headers(token):
+
+#     print("headers")
+
+#     return {
+#         "Authorization": token
+#     }
+
+
+# def test_api(headers):
+
+#     print("test")
+
+# Responder:
+
+# ¿Qué se imprime primero? token
+# ¿Qué se imprime después? headers
+# ¿Se ejecuta cleanup token? Si
+# ¿Por qué? Porque la fixture token() utiliza la palabra clave yield en lugar de return.
+#   Las fixtures que utilizan yield ejecutan el código anterior al yield durante la fase de setup. 
+#   Una vez finaliza el test, Pytest continúa ejecutando el código posterior al yield, realizando automáticamente el teardown o cleanup
+# ¿Qué dependencia existe entre las fixtures?
+#   headers depende directamente de token.
+#   test_api depende de headers e indirectamente de token.
