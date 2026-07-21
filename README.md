@@ -119,7 +119,6 @@ pytest -m smoke
 - ✅ Factory Fixtures
 - ✅ Objetos personalizados
 - ✅ Colecciones
-- ✅ Buenas prácticas
 - ✅ Ejercicios tipo entrevista
 
 ---
